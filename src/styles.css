@@ -1,0 +1,12 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import '~font-awesome/css/font-awesome.css';
+
+.card-body {
+    border-top-left-radius: .25rem;
+    border-top-right-radius: .25rem;
+}
+
+h1 {
+    font-size: 56px;
+}

@@ -1,0 +1,67 @@
+<div class="container" dir="rtl">
+  <div class="jumbotron">
+    <h1 class="text-center">{{title}}</h1>
+  </div>
+
+  <div class="row">
+    <div class="col-2">
+      <h3 class="text-right">שם לקוח:</h3>
+    </div>
+    <div class="col-4"><input type="text" #inputFullname class="form-control"></div>
+    <div class="col-2"><button type="button" class="btn btn-primary" (click)="onAddVisit()">הכנס לתור</button></div>
+  </div>
+
+  <hr>
+
+  <div class="row" *ngIf="modalData.length">
+    <div class="col-2">
+      <h3 class="text-right">בשירות:</h3>
+    </div>
+    <div class="col-4">
+      <div *ngFor="let item of modalData; let i=index">
+        <div class="card" *ngIf="item.QueueStatus==1">
+          <div class="card-body bg-primary text-white text-center">
+            <p>לקוח מספר</p>
+            <h1>{{item.QueueNumber}}</h1>
+          </div>
+          <div class="card-footer">
+            <h4 class="card-title text-center">{{item.FullName}}</h4>
+            <div class="text-center"><i class="fa fa-clock-o" aria-hidden="true"></i> {{item.QueueDate|date:'hh:mm'}}
+            </div>
+            <hr>
+            <button type="button" class="btn btn-primary" (click)="onNextVisit(item)">קרה להבא בתור</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="modalData.length==0">
+    <div class="col-12">
+      <h4 class="text-right">אין שירות כרגע</h4>
+    </div>
+  </div>
+  <hr>
+
+  <div class="row" *ngIf="modalData.length>0">
+    <div class="col-12">
+      <h3 class="text-right">רשימת ממתינים:</h3>
+      <table class="table table-bordered">
+        <thead class="text-center">
+          <tr>
+            <th>מספר תור</th>
+            <th>שם לקוח</th>
+            <th>שעת כניסה לתור</th>
+          </tr>
+        </thead>
+        <tbody class="text-center" *ngFor="let item of modalData; let i=index; let last=last">
+          <tr *ngIf="item.QueueStatus==0">
+            <td>{{item.QueueNumber}}</td>
+            <td>{{item.FullName}}</td>
+            <td>{{item.QueueDate|date:'hh:mm'}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
